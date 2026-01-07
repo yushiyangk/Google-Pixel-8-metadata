@@ -14,7 +14,7 @@ RAW_JPG_SUFFIX=".RAW-01.COVER.jpg"
 RAW_DNG_SUFFIX=".RAW-02.ORIGINAL.dng"
 RAW_MOTION_PHOTO_JPG_SUFFIX=".RAW-01.MP.COVER.jpg"
 
-jpg_counter=0
+counter=0
 no_jpg_raw_photos=()
 no_dng_raw_photos=()
 motion_photo_raw_photos=()
@@ -23,7 +23,7 @@ target_dng_exist_raw_photos=()
 
 while read -r file; do
 	if [ -n "$file" ]; then
-		((jpg_counter++))
+		((counter++))
 
 		input_file="$INPUT_DIR/$file"
 		input_file_root_name="$(basename "$input_file" "$RAW_JPG_SUFFIX")"
@@ -82,7 +82,7 @@ while read -r file; do
 done <<< "$(find "$INPUT_DIR" -type f -name '*'"$RAW_DNG_SUFFIX" -printf '%P\n')"
 
 echo ""
-echo "Renamed $((jpg_counter - ${#no_dng_raw_photos[@]} - ${#target_jpg_exist_raw_photos[@]} - ${#target_dng_exist_raw_photos[@]})) out of $jpg_counter pairs of *$RAW_JPG_SUFFIX and *$RAW_DNG_SUFFIX files"
+echo "Renamed $((jpg_counter - ${#no_dng_raw_photos[@]} - ${#target_jpg_exist_raw_photos[@]} - ${#target_dng_exist_raw_photos[@]} - ${#motion_photo_raw_photos[@]} - ${#no_jpg_raw_photos[@]})) out of $counter pairs of *$RAW_JPG_SUFFIX and *$RAW_DNG_SUFFIX files"
 
 
 if [ ${#no_dng_raw_photos[@]} -ne 0 ]; then
