@@ -84,8 +84,12 @@ while read -r file; do
 	fi
 done <<< "$(find "$INPUT_DIR" -type f -name '*'"$RAW_MOTION_PHOTO_JPG_SUFFIX" -printf '%P\n')"
 
-find "$OUTPUT_VIDEO_DIR" -type d -empty -delete
-find "$OUTPUT_PHOTO_DIR" -type d -empty -delete
+if [ -d "$OUTPUT_VIDEO_DIR" ]; then
+	find "$OUTPUT_VIDEO_DIR" -type d -empty -delete
+fi
+if [ -d "$OUTPUT_PHOTO_DIR" ]; then
+	find "$OUTPUT_PHOTO_DIR" -type d -empty -delete
+fi
 
 echo ""
 if [ ${#motion_photos[@]} -ne 0 ]; then
