@@ -49,8 +49,8 @@ while read -r file; do
 			if [ $safe_to_rename -eq 1 ]; then
 				echo "Renaming '$input_file' -> '$target_jpg_file'"
 				echo "Renaming '$dng_file' -> '$target_dng_file'"
-				mv "$input_file" "$target_jpg_file"
-				mv "$dng_file" "$target_dng_file"
+				mv -n "$input_file" "$target_jpg_file"
+				mv -n "$dng_file" "$target_dng_file"
 			fi
 
 		else
